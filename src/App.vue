@@ -1,18 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <BootstrapTest />
-  <MyTab />
+  <CmmnMenu :menuData="menuData"/>
 </template>
 
 <script>
-import BootstrapTest from "./components/BootstrapTest.vue"
-import MyTab from "./components/tab/MyTab.vue"
+import CmmnMenu from "./components/CmmnMenu/CmmnMenu.vue"
+import {data} from "./menuData";
+
+const fetch = () => {
+  const menuData = data.filter(obj => obj.useYn === "Y");
+  return menuData;
+}
+
+const menuData = fetch();
+
 
 export default {
   name: 'App',
+  data(){
+    return {
+      menuData,
+      
+    }
+  },
   components: {
-    BootstrapTest,
-    MyTab
+    CmmnMenu,
   }
 }
 </script>

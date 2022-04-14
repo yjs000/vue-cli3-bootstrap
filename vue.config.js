@@ -5,6 +5,9 @@ module.exports = defineConfig({
     proxy : {
       '/WEBTEMP':{
         target : 'http://localhost:9090/'
+      },
+      "/OperatingSystem":{
+        target: "http://lcoalhost:8080/"
       }
     }
   }
