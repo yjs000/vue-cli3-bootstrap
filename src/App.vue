@@ -4,13 +4,16 @@
   </CmmnMenu>
   <CmmnTab :tabList="tabList" :closeTab="removeTab" :clickTab="setCurrentTab" :currentTab="currentTab"> </CmmnTab>
   <KeepAlive>
-    <component :is="tabContent" />
+    <component :is="tabContent">
+      </component>
   </KeepAlive>
 </template>
 
 <script>
 import CmmnMenu from "./components/CmmnMenu/CmmnMenu.vue";
 import CmmnTab from "./components/CmmnTab/CmmnTab.vue";
+import CmmnButton from "./components/CmmnButton/CmmnButton.vue"
+import CmmnContent from "./components/CmmnTab/contents/CmmnContent.vue"
 import { data } from "./menuData";
 
 import MyContent102010000 from "./components/CmmnTab/contents/MyContent102010000.vue"
@@ -39,6 +42,8 @@ export default {
   components: {
     CmmnMenu,
     CmmnTab,
+    CmmnContent,
+    CmmnButton,
     MyContent102010000
   },
   methods: {
@@ -49,15 +54,24 @@ export default {
       }
     },
     removeTab(tabInfo) {
-      const index = this.tabList.indexOf(tabInfo);
-      if(this.currentTab == tabInfo.menuId){
-        this.setCurrentTab(this.tabList[index -1].menuId)
-      }
+      let index = this.tabList.indexOf(tabInfo);
       this.tabList.splice(index, 1);
-      
+      console.log(index);
+      console.log(this.tabList.length);
+      if(this.currentTab.menuId == tabInfo.menuId){ //지워진 아이가 현재 선택된 아이면
+        if(index > this.tabList.length-1){
+          console.log("bigger")
+          index = this.tabList.length-1;
+        }
+        this.setCurrentTab(this.tabList[index]);
+      }
     },
     setCurrentTab(tabInfo) {
-      this.currentTab = tabInfo;
+      if(tabInfo){
+        this.currentTab = tabInfo;
+      } else {
+        this.currentTab = null;
+      }
     },
   },
 };
