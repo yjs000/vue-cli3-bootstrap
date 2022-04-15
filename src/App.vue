@@ -12,7 +12,6 @@
 <script>
 import CmmnMenu from "./components/CmmnMenu/CmmnMenu.vue";
 import CmmnTab from "./components/CmmnTab/CmmnTab.vue";
-import CmmnButton from "./components/CmmnButton/CmmnButton.vue"
 import CmmnContent from "./components/CmmnTab/contents/CmmnContent.vue"
 import { data } from "./menuData";
 
@@ -44,7 +43,6 @@ export default {
     CmmnMenu,
     CmmnTab,
     CmmnContent,
-    CmmnButton,
     MyContent102010000
   },
   methods: {
