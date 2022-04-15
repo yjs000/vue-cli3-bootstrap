@@ -3,16 +3,29 @@
     <template #logo>UlsanOS</template>
   </CmmnMenu>
   <CmmnTab :tabList="tabList" :closeTab="removeTab" :clickTab="setCurrentTab" :currentTab="currentTab"> </CmmnTab>
+  
   <KeepAlive :exclude="excludeContent">
-    <component :is="tabContent" >
-      </component>
+    <component :is="cmmnContent">
+      <template #tempMsg> 
+          <h1>hello {{currentTab.menuNm}}</h1>
+        </template>
+        <template #content>
+          <component :is="tabContent"/>
+        </template>
+    </component>
+    
   </KeepAlive>
+      <!-- <component :is="tabContent" >
+      </component>   -->
+
+      
 </template>
 
 <script>
 import CmmnMenu from "./../CmmnMenu/CmmnMenu.vue"
 import CmmnTab from "./../CmmnTab/CmmnTab.vue";
 import CmmnContent from "../CmmnTab/contents/CmmnContent.vue"
+import ErrorComp from "../ErrorComp.vue"
 import { data } from "../../menuData";
 
 // contents
@@ -31,19 +44,26 @@ const menuData = fetch();
 export default {
   name: "App",
   data() {
+    console.log(this.CmmnContent)
+    console.log(this.MyContent102010000)
     return {
       menuData,
       tabList: [],
       currentTab: null,
       excludeContent : [],
+      cmmnContent : this.CmmnContent ?? "ErrorComp",
     };
   },
   computed : {
     tabContent(){
       return this.currentTab ? "MyContent" + this.currentTab.menuId : null;
     },
+    cmmnContent(){
+      return this.currentTab ? "CmmnContent" : null;
+    }
   },
   components: {
+    ErrorComp,
     CmmnMenu,
     CmmnTab,
     CmmnContent,
