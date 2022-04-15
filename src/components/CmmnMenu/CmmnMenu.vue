@@ -1,7 +1,9 @@
 <template>
   <ul class="navbar navbar-dark bg-dark p-2 mb-0">
     <li class="container-fluid col">
-      <a class="navbar-brand" href="">LOGO</a>
+      <a class="navbar-brand" href="">
+        <slot name="logo">LOGO</slot>
+      </a>
     </li>
     <div class="container-fluid col">
       <button
@@ -12,6 +14,7 @@
         aria-controls="siteMap"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        
       >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,26 +27,24 @@
       </ul>
     </div>
   </ul>
-
+  
   <div class="collapse" id="siteMap">
     <ul class="navbar navbar-expand navbar-dark bg-dark p-2 mb-0" v-for="menu1 in menuDpth1" :key="menu1.menuId">
       <li class="col-3">
-        <a class="navbar-brand" href="menu.lnknInfo">{{menu1.menuNm}}</a>
+        <a class="navbar-brand" :href="menu1.lnknInfo">{{menu1.menuNm}}</a>
       </li>
       <div>
         <ul class="navbar-nav" >
           <template v-for="menu2 in menuDpth2" :key="menu2.menuId">
             <li class="nav-item" v-if="menu1.menuId == menu2.hgrnMenuId">
               <ul >
-                <li class="nav-item">
-                  <a class="nav-link" href="">
-                    <strong>{{menu2.menuNm}}</strong>
-                    </a>
-                </li>
+                <NavItem :href="menu2.lnknInfo" @click="$emit('menuClick', menu2), toggleMenu()">
+                  <strong>{{menu2.menuNm}}</strong>
+                </NavItem>
                 <template v-for="menu3 in menuDpth3" :key="menu3.menuId">
-                  <li class="nav-item" v-if="menu2.menuId == menu3.hgrnMenuId">
-                    <a class="nav-link" href="">{{menu3.menuNm}}</a>
-                  </li>
+                  <NavItem v-if="menu2.menuId == menu3.hgrnMenuId" :href="menu3.lnknInfo" @click="$emit('menuClick', menu3), toggleMenu()">
+                    {{menu3.menuNm}}
+                  </NavItem>
                 </template>
               </ul>
               </li>
@@ -55,8 +56,11 @@
 </template>
 
 <script>
+import NavItem from "../CmmnBootstrap/NavItem.vue"
+
 export default {
   props: ["menuData"],
+  emits: ["menuClick"],
   data() {
     return {
       showSiteMap: false,
@@ -80,12 +84,16 @@ export default {
       )
     },
   },
-  methods: {
-    openSiteMap() {
-      this.showSiteMap = !this.showSiteMap;
-      console.log(this);
-    },
+  components : {
+    NavItem,
   },
+  methods :{
+     toggleMenu(){
+      const toggler = document.querySelector(".navbar-toggler[data-bs-target='#siteMap']");
+      toggler.click();
+      return null;
+    }
+  }
 };
 </script>
 
