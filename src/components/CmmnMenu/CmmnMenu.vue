@@ -57,6 +57,7 @@
 
 <script>
 import NavItem from "../CmmnBootstrap/NavItem.vue"
+import {Collapse} from "bootstrap";
 
 export default {
   props: ["menuData"],
