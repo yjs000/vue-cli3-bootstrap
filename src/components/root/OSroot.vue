@@ -29,7 +29,8 @@ import ErrorComp from "../ErrorComp.vue"
 import { data } from "../../menuData";
 
 // contents
-import MyContent102010000 from "./../CmmnTab/contents/MyContent102010000.vue"
+// import MyContent102010000 from "./../CmmnTab/contents/MyContent102010000.vue"
+import { defineAsyncComponent } from '@vue/runtime-core';
 
 //메뉴는 어차피 다시 작성할 가능성이 높음
 //tab이나 화면은 재사용성 높음
@@ -67,7 +68,9 @@ export default {
     CmmnMenu,
     CmmnTab,
     CmmnContent,
-    MyContent102010000
+    MyContent102010000 : defineAsyncComponent(() => 
+      import("./../CmmnTab/contents/MyContent102010000.vue")
+    ),
   },
   methods: {
     addTab(tabInfo) {
