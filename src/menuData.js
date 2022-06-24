@@ -1,4 +1,4 @@
-const data = [
+export const data = [
   {
   menuId: "102000000",
   menuNm: "C-ITS",
@@ -3101,4 +3101,3 @@ const data = [
   useYn: "Y"
   }
   ];
-export {data}
