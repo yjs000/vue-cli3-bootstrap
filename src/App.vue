@@ -8,15 +8,27 @@
         :to="menuObj.lnknInfo"
       >{{menuObj.menuNm}}</router-link>
     </template>
-    <template v-else></template>
+
+    <!-- <template v-else-if="menuObj.lnknInfo.includes('http://')">
+      <a 
+        :href="menuObj.lnknInfo"
+      >{{menuObj.menuNm}}</a>
+    </template> -->
+
+    <!-- <template v-else>
+      <a :href="menuObj.lnknInfo">없음</a>
+    </template> -->
   </template>
   
-  <router-view></router-view>
+  <router-view v-slot="{ TheTab, route }">
+    <the-tab :route="route"></the-tab>
+  </router-view>
 </template>
 
 <script>
 // import OSroot from './components/root/OSroot.vue';
 import { data } from '@/menuData.js'
+import TheTab from '@/components/TheTab.vue'
 
 const fetchData = () => {
   const menuData = data.filter((obj) => obj.useYn === "Y");
@@ -33,6 +45,9 @@ export default {
       menuData: data,
     }
   },
+  components : {
+    TheTab
+  }
 }
 </script>
 
