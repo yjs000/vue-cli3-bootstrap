@@ -1,17 +1,20 @@
 <template>
   <h1>hello</h1>
   <input type="text" />
-  <div id="grid"></div>
 </template>
 
 <script>
+<<<<<<< HEAD
 // import "./../../../js/grid/aljjabaegi.grid.core-2.0.1"
 // import "./../../../js/grid/css/aljjabaegi.grid-2.0.0.css"
+=======
+>>>>>>> 5f134a2020ed69de629b49236a2bfa1bb3ea7dc1
 
 //gird에 edit버튼이 같이 있기 때문에 commonButton은 추가할 필요 없음
 
 export default {
   name : "MyContent102010000",
+<<<<<<< HEAD
   // mounted(){
   //   this.setGrid();
   // },
@@ -39,5 +42,7 @@ export default {
   //     let grid = AG(option);
   //   }
   // }
+=======
+>>>>>>> 5f134a2020ed69de629b49236a2bfa1bb3ea7dc1
 }
 </script>
